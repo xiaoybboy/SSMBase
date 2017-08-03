@@ -8,9 +8,27 @@
 		<result column="emp_email" jdbcType="VARCHAR" property="empEmail" />
 		<result column="dep_id" jdbcType="INTEGER" property="depId" />
 	</resultMap>
+
+	<resultMap type="com.xiaoyb.domain.Employee" id="WithDeptResultMap">
+		<id column="emp_id" jdbcType="INTEGER" property="empId" />
+		<result column="emp_name" jdbcType="VARCHAR" property="empName" />
+		<result column="emp_gender" jdbcType="CHAR" property="empGender" />
+		<result column="emp_email" jdbcType="VARCHAR" property="empEmail" />
+		<result column="dep_id" jdbcType="INTEGER" property="depId" />
+		<!-- 指定联合查询出的部门字段的封装 -->
+		<association property="department" javaType="com.xiaoyb.domain.Department">
+			<id column="dept_id" property="deptId" />
+			<result column="dept_name" property="deptName" />
+		</association>
+	</resultMap>
 	<sql id="Base_Column_List">
 		emp_id, emp_name, emp_gender, emp_email, dep_id
 	</sql>
+	<sql id="WithDept_Column_List">
+		e.emp_id, e.emp_name, e.gender, e.email,
+		e.d_id,d.dept_id,d.dept_name
+	</sql>
+
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
 		select
@@ -18,6 +36,22 @@
 		from employee
 		where emp_id = #{empId,jdbcType=INTEGER}
 	</select>
+
+	<select id="selectByPrimaryKeyWithDep" parameterType="java.lang.Integer"
+		resultMap="WithDeptResultMap">
+		select
+		<include refid="WithDept_Column_List" />
+		from employee
+		where emp_id = #{empId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 查询出所有员工 -->
+	<select id="selectAllEmp" resultMap="WithDeptResultMap">
+		select
+		<include refid="WithDept_Column_List" />
+		from employee
+	</select>
+
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
 		employee

@@ -7,6 +7,15 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
 
+	<!-- 配置分页插件 -->
+	<plugins>
+		<plugininterceptor =
+			com.github.pagehelper.PageHelper ">
+			<!-- 设置数据库类型 Oracle,MySQL,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
+			<propertyname = dialect " value="mysql" />
+		</plugin>
+	</plugins>
+
 	<typeAliases>
 		<package name="com.xiaoyb.domain" />
 	</typeAliases>
