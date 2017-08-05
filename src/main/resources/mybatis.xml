@@ -7,8 +7,10 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
 
+	<!-- <typeAliases> <package name="com.xiaoyb.domain" /> </typeAliases> -->
 	<typeAliases>
-		<package name="com.xiaoyb.domain" />
+		<typeAlias alias="employee" type="com.xiaoyb.domain.Employee" />
+		<typeAlias alias="department" type="com.xiaoyb.domain.Department" />
 	</typeAliases>
 
 	<!-- 配置分页插件 -->

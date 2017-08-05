@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiaoyb.dao.DepartmentMapper">
-	<resultMap id="BaseResultMap" type="com.xiaoyb.domain.Department">
+	<resultMap id="BaseResultMap" type="department">
 		<id column="dep_id" jdbcType="INTEGER" property="depId" />
 		<result column="dep_name" jdbcType="VARCHAR" property="depName" />
 	</resultMap>
@@ -9,7 +9,7 @@
 		dep_id, dep_name
 	</sql>
 	<!-- 查询所有的部门 -->
-	<select id="selectAllEmp" resultMap="com.xiaoyb.domain.Department">
+	<select id="selectAllEmp" resultMap="department">
 		select
 		<include refid="Base_Column_List" />
 		from department
@@ -26,13 +26,13 @@
 		department
 		where dep_id = #{depId,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.xiaoyb.domain.Department">
+	<insert id="insert" parameterType="department">
 		insert into department
 		(dep_id, dep_name)
 		values (#{depId,jdbcType=INTEGER},
 		#{depName,jdbcType=VARCHAR})
 	</insert>
-	<insert id="insertSelective" parameterType="com.xiaoyb.domain.Department">
+	<insert id="insertSelective" parameterType="department">
 		insert into department
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="depId != null">
@@ -51,7 +51,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.xiaoyb.domain.Department">
+	<update id="updateByPrimaryKeySelective" parameterType="department">
 		update department
 		<set>
 			<if test="depName != null">
@@ -60,7 +60,7 @@
 		</set>
 		where dep_id = #{depId,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.xiaoyb.domain.Department">
+	<update id="updateByPrimaryKey" parameterType="department">
 		update department
 		set dep_name = #{depName,jdbcType=VARCHAR}
 		where dep_id =

@@ -28,7 +28,7 @@
 		<!-- 指定mybatis全局配置文件的位置 -->
 		<property name="configLocation" value="classpath:mybatis.xml"></property>
 		<property name="dataSource" ref="datasource"></property>
-		<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+		<property name="mapperLocations" value="classpath:mapper/EmployeeMapper.xml"></property>
 	</bean>
 
 	<!-- 配置扫描器，将mybatis接口的实现加入到ioc中 -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiaoyb.dao.EmployeeMapper">
-	<resultMap id="BaseResultMap" type="com.xiaoyb.domain.Employee">
+	<resultMap id="BaseResultMap" type="employee">
 		<id column="emp_id" jdbcType="INTEGER" property="empId" />
 		<result column="emp_name" jdbcType="VARCHAR" property="empName" />
 		<result column="emp_gender" jdbcType="CHAR" property="empGender" />
@@ -9,14 +9,14 @@
 		<result column="dep_id" jdbcType="INTEGER" property="depId" />
 	</resultMap>
 
-	<resultMap type="com.xiaoyb.domain.Employee" id="WithDeptResultMap">
+	<resultMap type="employee" id="WithDeptResultMap">
 		<id column="emp_id" jdbcType="INTEGER" property="empId" />
 		<result column="emp_name" jdbcType="VARCHAR" property="empName" />
 		<result column="emp_gender" jdbcType="CHAR" property="empGender" />
 		<result column="emp_email" jdbcType="VARCHAR" property="empEmail" />
 		<result column="dep_id" jdbcType="INTEGER" property="depId" />
 		<!-- 指定联合查询出的部门字段的封装 -->
-		<association property="department" javaType="com.xiaoyb.domain.Department">
+		<association property="department" javaType="department">
 			<id column="dept_id" property="deptId" />
 			<result column="dept_name" property="deptName" />
 		</association>
@@ -55,7 +55,7 @@
 		employee
 		where emp_id = #{empId,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.xiaoyb.domain.Employee">
+	<insert id="insert" parameterType="employee">
 		insert into employee (emp_id,
 		emp_name, emp_gender,
 		emp_email, dep_id)
@@ -65,7 +65,7 @@
 		#{empEmail,jdbcType=VARCHAR},
 		#{depId,jdbcType=INTEGER})
 	</insert>
-	<insert id="insertSelective" parameterType="com.xiaoyb.domain.Employee">
+	<insert id="insertSelective" parameterType="employee">
 		insert into employee
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="empId != null">
@@ -102,7 +102,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.xiaoyb.domain.Employee">
+	<update id="updateByPrimaryKeySelective" parameterType="employee">
 		update employee
 		<set>
 			<if test="empName != null">
@@ -120,7 +120,7 @@
 		</set>
 		where emp_id = #{empId,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.xiaoyb.domain.Employee">
+	<update id="updateByPrimaryKey" parameterType="employee">
 		update employee
 		set emp_name = #{empName,jdbcType=VARCHAR},
 		emp_gender =
