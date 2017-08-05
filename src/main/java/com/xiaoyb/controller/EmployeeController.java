@@ -13,6 +13,8 @@ import com.github.pagehelper.PageInfo;
 import com.xiaoyb.domain.Employee;
 import com.xiaoyb.service.EmployeeService;
 
+import junit.framework.Test;
+
 /**
  * 处理员工相关请求
  * 
@@ -24,6 +26,12 @@ public class EmployeeController {
 
 	@Autowired
 	EmployeeService employeeService;
+
+	@RequestMapping("/test")
+	public String Test() {
+		System.out.println("test");
+		return "index";
+	}
 
 	/**
 	 * 查询所有员工信息（分页查询）
