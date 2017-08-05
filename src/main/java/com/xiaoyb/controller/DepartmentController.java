@@ -23,16 +23,12 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentservice;
 
-	@RequestMapping("/test2")
-	public String Test() {
-		System.out.println("test2");
-		return "index";
-	}
-
 	@RequestMapping("/depts")
+	@ResponseBody
 	public Msg getDepts() {
 		System.out.println("test");
 		List<Department> departments = departmentservice.getDepts();
+		System.out.println(departments.size());
 		return Msg.success().add("depts", departments);
 	}
 

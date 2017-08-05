@@ -161,7 +161,6 @@
 						</tr>
 					</thead>
 					<tbody>
-
 					</tbody>
 				</table>
 			</div>
@@ -362,12 +361,12 @@
 					//显示部门信息在下拉列表中
 					console.log(result);
 					//$("#empAddModal select").append("")
-				
-		/* 	$.each(result.extend.depts, function() {
-							var optionEle = $("<option></option>").append(
-									this.deptName).attr("value", this.deptId);
-							optionEle.appendTo(ele);
-						}); */
+
+					/* 	$.each(result.extend.depts, function() {
+										var optionEle = $("<option></option>").append(
+												this.deptName).attr("value", this.deptId);
+										optionEle.appendTo(ele);
+									}); */
 				}
 			});
 		}
