@@ -26,6 +26,12 @@
 		emp_id, emp_name, emp_gender, emp_email, dep_id
 	</sql>
 
+	<!-- 查询数据库中某个姓名的员工的人数是 -->
+	<select id="checkUser" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(emp_id) from employee where emp_name
+		=#{empName}
+	</select>
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
 		select

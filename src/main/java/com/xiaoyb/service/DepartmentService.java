@@ -20,7 +20,6 @@ public class DepartmentService {
 	 * @return
 	 */
 	public List<Department> getDepts() {
-		System.out.println("service");
 		return departmentMapper.selectAllDept();
 	}
 

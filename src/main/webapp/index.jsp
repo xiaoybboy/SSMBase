@@ -359,14 +359,14 @@
 					//{"code":100,"msg":"处理成功！",
 					//"extend":{"depts":[{"deptId":1,"deptName":"开发部"},{"deptId":2,"deptName":"测试部"}]}}
 					//显示部门信息在下拉列表中
-					console.log(result);
+					//console.log(result);
 					//$("#empAddModal select").append("")
 
-					/* 	$.each(result.extend.depts, function() {
-										var optionEle = $("<option></option>").append(
-												this.deptName).attr("value", this.deptId);
-										optionEle.appendTo(ele);
-									}); */
+					$.each(result.extend.depts, function() {
+						var optionEle = $("<option></option>").append(
+								this.depName).attr("value", this.depId);
+						optionEle.appendTo(ele);
+					});
 				}
 			});
 		}
@@ -457,7 +457,7 @@
 							//2、发送ajax请求保存员工
 							$
 									.ajax({
-										url : "${APP_PATH}/emp",
+										url : "${APP_PATH}/empsave",
 										type : "POST",
 										data : $("#empAddModal form")
 												.serialize(),

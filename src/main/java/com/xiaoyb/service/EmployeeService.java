@@ -23,4 +23,18 @@ public class EmployeeService {
 		return employeeMapper.selectAllEmp();
 	}
 
+	public void saveEmp(Employee employee) {
+		employeeMapper.insertSelective(employee);
+	}
+
+	/**
+	 * 检验用户名是否重复
+	 * 
+	 * @param empName
+	 * @return true：代表当前姓名可用 fasle：不可用
+	 */
+	public boolean checkUser(String empName) {
+		return employeeMapper.checkUser(empName) == 0;
+	}
+
 }
