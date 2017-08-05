@@ -8,6 +8,12 @@
 	<sql id="Base_Column_List">
 		dep_id, dep_name
 	</sql>
+	<!-- 查询所有的部门 -->
+	<select id="selectAllEmp" resultMap="com.xiaoyb.domain.Department">
+		select
+		<include refid="Base_Column_List" />
+		from department
+	</select>
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
 		select

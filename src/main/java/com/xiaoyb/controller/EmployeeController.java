@@ -25,12 +25,6 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
 
-	@RequestMapping("/test")
-	public String Test() {
-		System.out.println("test");
-		return "index";
-	}
-
 	/**
 	 * 查询所有员工信息（分页查询）
 	 * 
@@ -48,7 +42,6 @@ public class EmployeeController {
 		// 用PageInfo对结果进行包装
 		PageInfo<Employee> page = new PageInfo<Employee>(employees);
 		model.addAttribute("pageInfo", page);
-		System.out.println("success");
 		return "list";
 
 	}

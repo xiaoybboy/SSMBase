@@ -1,17 +1,21 @@
 package com.xiaoyb.dao;
 
+import java.util.List;
+
 import com.xiaoyb.domain.Department;
 
 public interface DepartmentMapper {
-    int deleteByPrimaryKey(Integer depId);
+	int deleteByPrimaryKey(Integer depId);
 
-    int insert(Department record);
+	int insert(Department record);
 
-    int insertSelective(Department record);
+	List<Department> selectAllDept();
 
-    Department selectByPrimaryKey(Integer depId);
+	int insertSelective(Department record);
 
-    int updateByPrimaryKeySelective(Department record);
+	Department selectByPrimaryKey(Integer depId);
 
-    int updateByPrimaryKey(Department record);
+	int updateByPrimaryKeySelective(Department record);
+
+	int updateByPrimaryKey(Department record);
 }
