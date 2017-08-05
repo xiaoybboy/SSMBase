@@ -383,8 +383,7 @@
 				return false;
 			} else {
 				show_validate_msg("#empName_add_input", "success", "");
-			}
-			;
+			};
 
 			//2、校验邮箱信息
 			var email = $("#email_add_input").val();
@@ -416,7 +415,7 @@
 			}
 		}
 
-		//校验用户名是否可用
+		//ajax校验用户名是否可用
 		$("#empName_add_input").change(
 				function() {
 					//发送ajax请求校验用户名是否可用
@@ -447,9 +446,8 @@
 							//1、先对要提交给服务器的数据进行校验
 							if (!validate_add_form()) {
 								return false;
-							}
-							;
-							//1、判断之前的ajax用户名校验是否成功。如果成功。
+							};
+							//1、判断之前的ajax用户名校验(在数据库中是否重复)是否成功。如果成功。
 							if ($(this).attr("ajax-va") == "error") {
 								return false;
 							}
@@ -522,8 +520,8 @@
 					$("#empName_update_static").text(empData.empName);
 					$("#email_update_input").val(empData.email);
 					$("#empUpdateModal input[name=gender]").val(
-							[ empData.gender ]);
-					$("#empUpdateModal select").val([ empData.dId ]);
+							[empData.gender]);
+					$("#empUpdateModal select").val([empData.dId]);
 				}
 			});
 		}
