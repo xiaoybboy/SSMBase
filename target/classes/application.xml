@@ -14,8 +14,7 @@
 	</context:component-scan>
 
 	<!-- 引用外部资源文件 -->
-	<context:property-placeholder location="classpath:db.properties"
-	ignore-unresolvable="true" />
+	<context:property-placeholder location="classpath:db.properties" />
 	<!-- 数据源 -->
 	<bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${jdbc.driverClass}"></property>
@@ -36,6 +35,12 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!--扫描所有的dao接口的实现,加入到ioc中 -->
 		<property name="basePackage" value="com.xiaoyb.dao"></property>
+	</bean>
+
+	<!-- 配置一个可以执行批量的sqlSession -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+		<constructor-arg name="executorType" value="BATCH"></constructor-arg>
 	</bean>
 
 	<!-- 事务控制 -->
