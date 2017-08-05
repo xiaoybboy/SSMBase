@@ -21,12 +21,9 @@
 			<result column="dept_name" property="deptName" />
 		</association>
 	</resultMap>
+
 	<sql id="Base_Column_List">
 		emp_id, emp_name, emp_gender, emp_email, dep_id
-	</sql>
-	<sql id="WithDept_Column_List">
-		e.emp_id, e.emp_name, e.gender, e.email,
-		e.d_id,d.dept_id,d.dept_name
 	</sql>
 
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
@@ -40,15 +37,16 @@
 	<select id="selectByPrimaryKeyWithDep" parameterType="java.lang.Integer"
 		resultMap="WithDeptResultMap">
 		select
-		<include refid="WithDept_Column_List" />
-		from employee
-		where emp_id = #{empId,jdbcType=INTEGER}
+		*
+		from employee e,department d
+		where e.emp_id =
+		#{empId,jdbcType=INTEGER} and e.dep_id=d.dep_id
 	</select>
 
 	<!-- 查询出所有员工 -->
 	<select id="selectAllEmp" resultMap="WithDeptResultMap">
 		select
-		<include refid="WithDept_Column_List" />
+		*
 		from employee
 	</select>
 

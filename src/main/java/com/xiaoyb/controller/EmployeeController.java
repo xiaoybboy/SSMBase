@@ -43,13 +43,14 @@ public class EmployeeController {
 	@RequestMapping("/emps")
 	public String getEmps(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 
-		// 分页查询，在查询数据之前调用startPage。传入页码和每页的数量
+		// 分页查询，在查询数据之前调用startPage,传入页码和每页的数量
 		PageHelper.startPage(pn, 5);
 		// 紧跟着的第一个select方法会被分页
 		List<Employee> employees = employeeService.getAllEmp();
 		// 用PageInfo对结果进行包装
 		PageInfo<Employee> page = new PageInfo<Employee>(employees);
-		model.addAttribute("pageinfo", page);
+		model.addAttribute("pageInfo", page);
+		System.out.println("success");
 		return "list";
 
 	}
