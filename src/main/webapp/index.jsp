@@ -35,8 +35,8 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">email</label>
 							<div class="col-sm-10">
-								<input type="text" name="email" class="form-control" id="email_update_input"
-									placeholder="email@atguigu.com">
+								<input type="text" name="empEmail" class="form-control" id="email_update_input"
+									placeholder="email@163.com">
 								<span class="help-block"></span>
 							</div>
 						</div>
@@ -44,11 +44,11 @@
 							<label class="col-sm-2 control-label">gender</label>
 							<div class="col-sm-10">
 								<label class="radio-inline">
-									<input type="radio" name="gender" id="gender1_update_input" value="M" checked="checked">
+									<input type="radio" name="empGender" id="gender1_update_input" value="M" checked="checked">
 									男
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="gender" id="gender2_update_input" value="F">
+									<input type="radio" name="empGender" id="gender2_update_input" value="F">
 									女
 								</label>
 							</div>
@@ -57,7 +57,7 @@
 							<label class="col-sm-2 control-label">deptName</label>
 							<div class="col-sm-4">
 								<!-- 部门提交部门id即可 -->
-								<select class="form-control" name="dId">
+								<select class="form-control" name="depId">
 								</select>
 							</div>
 						</div>
@@ -519,10 +519,10 @@
 				success : function(result) {
 					var empData = result.extend.emp;
 					$("#empName_update_static").text(empData.empName);
-					$("#email_update_input").val(empData.email);
+					$("#email_update_input").val(empData.empEmail);
 					$("#empUpdateModal input[name=gender]").val(
-							[empData.gender]);
-					$("#empUpdateModal select").val([empData.dId]);
+							[empData.empGender]);
+					$("#empUpdateModal select").val([empData.depId]);
 				}
 			});
 		}
@@ -542,11 +542,11 @@
 
 			//2、发送ajax请求保存更新的员工数据
 			$.ajax({
-				url : "${APP_PATH}/emp/" + $(this).attr("edit-id"),
-				type : "PUT",
+				url : "${APP_PATH}/empupdate/" + $(this).attr("edit-id"),
+				type : "POST",
 				data : $("#empUpdateModal form").serialize(),
 				success : function(result) {
-					//alert(result.msg);
+					alert(result.msg);
 					//1、关闭对话框
 					$("#empUpdateModal").modal("hide");
 					//2、回到本页面
@@ -564,10 +564,10 @@
 			if (confirm("确认删除【" + empName + "】吗？")) {
 				//确认，发送ajax请求删除即可
 				$.ajax({
-					url : "${APP_PATH}/emp/" + empId,
+					url : "${APP_PATH}/empdelete/" + empId,
 					type : "DELETE",
 					success : function(result) {
-						alert(result.msg);
+						//alert(result.msg);
 						//回到本页
 						to_page(currentPage);
 					}
@@ -617,10 +617,10 @@
 					if (confirm("确认删除【" + empNames + "】吗？")) {
 						//发送ajax请求删除
 						$.ajax({
-							url : "${APP_PATH}/emp/" + del_idstr,
+							url : "${APP_PATH}/empdelete/" + del_idstr,
 							type : "DELETE",
 							success : function(result) {
-								alert(result.msg);
+								//alert(result.msg);
 								//回到当前页面
 								to_page(currentPage);
 							}

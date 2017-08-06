@@ -55,6 +55,15 @@
 		employee
 		where emp_id = #{empId,jdbcType=INTEGER}
 	</delete>
+
+	<delete id="batchDeleteEmployee" parameterType="java.util.List">
+		DELETE FROM employee WHERE emp_id IN
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
 	<insert id="insert" parameterType="employee">
 		insert into employee (emp_id,
 		emp_name, emp_gender,

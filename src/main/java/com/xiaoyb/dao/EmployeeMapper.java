@@ -8,6 +8,8 @@ public interface EmployeeMapper {
 
 	int deleteByPrimaryKey(Integer empId);
 
+	void batchDeleteEmployee(List<Integer> ids);
+
 	int insert(Employee record);
 
 	int insertSelective(Employee record);

@@ -1,9 +1,11 @@
 package com.xiaoyb.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,4 +127,46 @@ public class EmployeeController {
 		Employee employee = employeeService.getEmp(id);
 		return Msg.success().add("emp", employee);
 	}
+
+	/**
+	 * 更新员工信息
+	 * 
+	 * @param employee
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/empupdate/{empId}", method = RequestMethod.POST)
+	public Msg updateEmp(Employee employee, HttpServletRequest request) {
+		// System.out.println("请求体中的值：" + request.getParameter("gender"));
+		// System.out.println("将要更新的员工数据：" + employee);
+		employeeService.updateEmp(employee);
+		// System.out.println("更新成功");
+		return Msg.success();
+	}
+
+	/**
+	 * 单个批量二合一 批量删除：1-2-3 单个删除：1
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/empdelete/{ids}", method = RequestMethod.DELETE)
+	public Msg deleteEmp(@PathVariable("ids") String ids) {
+		// 批量删除
+		if (ids.contains("-")) {
+			List<Integer> del_ids = new ArrayList<>();
+			String[] str_ids = ids.split("-");
+			// 组装id的集合
+			for (String string : str_ids) {
+				del_ids.add(Integer.parseInt(string));
+			}
+			employeeService.deleteBatch(del_ids);
+		} else {
+			Integer id = Integer.parseInt(ids);
+			employeeService.deleteEmp(id);
+		}
+		return Msg.success();
+	}
+
 }
