@@ -47,6 +47,7 @@
 		select
 		*
 		from employee
+		e,department d where e.dep_id=d.dep_id
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
