@@ -204,6 +204,7 @@
 			//清空table表格
 			$("#emps_table tbody").empty();
 			var emps = result.extend.pageInfo.list;
+			console.log(emps);
 			$
 					.each(
 							emps,
@@ -214,9 +215,10 @@
 										item.empName);
 								var genderTd = $("<td></td>").append(
 										item.gender == 'M' ? "男" : "女");
-								var emailTd = $("<td></td>").append(item.email);
+								var emailTd = $("<td></td>").append(
+										item.empEmail);
 								var deptNameTd = $("<td></td>").append(
-										item.department.deptName);
+										item.department.depName);
 								/**
 								<button class="">
 													<span class="" aria-hidden="true"></span>
@@ -493,10 +495,9 @@
 						});
 
 		//1、我们是按钮创建之前就绑定了click，所以绑定不上。
-		//1）、可以在创建按钮的时候绑定。    2）、绑定点击.live()
+		//1）、可以在创建按钮的时候绑定。  
 		//jquery新版没有live，使用on进行替代
 		$(document).on("click", ".edit_btn", function() {
-			//alert("edit");
 
 			//1、查出部门信息，并显示部门列表
 			getDepts("#empUpdateModal select");
@@ -510,12 +511,12 @@
 			});
 		});
 
+		//根据员工id查询员工
 		function getEmp(id) {
 			$.ajax({
 				url : "${APP_PATH}/emp/" + id,
 				type : "GET",
 				success : function(result) {
-					//console.log(result);
 					var empData = result.extend.emp;
 					$("#empName_update_static").text(empData.empName);
 					$("#email_update_input").val(empData.email);

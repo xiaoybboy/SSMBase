@@ -37,4 +37,14 @@ public class EmployeeService {
 		return employeeMapper.checkUser(empName) == 0;
 	}
 
+	/**
+	 * 根据员工id查询员工
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Employee getEmp(Integer id) {
+		return employeeMapper.selectByPrimaryKey(id);
+	}
+
 }

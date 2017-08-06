@@ -40,19 +40,24 @@ public class EmployeeController {
 	 * 
 	 * pn:查询的是第几页，默认是第一页
 	 * 
+	 * 导入jackson包。
+	 * 
+	 * @param pn
 	 * @return
 	 */
 	@RequestMapping("/emps")
-	public String getEmps(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
-
-		// 分页查询，在查询数据之前调用startPage,传入页码和每页的数量
+	@ResponseBody
+	public Msg getEmps(@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
+		// 引入PageHelper分页插件
+		// 在查询之前只需要调用，传入页码，以及每页的大小
 		PageHelper.startPage(pn, 5);
-		// 紧跟着的第一个select方法会被分页
-		List<Employee> employees = employeeService.getAllEmp();
-		// 用PageInfo对结果进行包装
-		PageInfo<Employee> page = new PageInfo<Employee>(employees);
-		model.addAttribute("pageInfo", page);
-		return "list";
+		// startPage后面紧跟的这个查询就是一个分页查询
+		List<Employee> emps = employeeService.getAllEmp();
+		System.out.println(emps.get(0).getDepartment().getDepName());
+		// 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
+		// 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数
+		PageInfo<Employee> page = new PageInfo<Employee>(emps, 5);
+		return Msg.success().add("pageInfo", page);// 把获取的所有员工以json的形式返回
 	}
 
 	/**
@@ -106,5 +111,18 @@ public class EmployeeController {
 		} else {
 			return Msg.fail().add("va_msg", "用户名不可用");
 		}
+	}
+
+	/**
+	 * 根据id查询员工
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/emp/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Msg getEmp(@PathVariable("id") Integer id) {
+		Employee employee = employeeService.getEmp(id);
+		return Msg.success().add("emp", employee);
 	}
 }

@@ -20,4 +20,10 @@ public class Department {
 	public void setDepName(String depName) {
 		this.depName = depName == null ? null : depName.trim();
 	}
+
+	@Override
+	public String toString() {
+		return "Department [depId=" + depId + ", depName=" + depName + "]";
+	}
+
 }

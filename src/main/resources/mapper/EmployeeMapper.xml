@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiaoyb.dao.EmployeeMapper">
-	<resultMap id="BaseResultMap" type="employee">
-		<id column="emp_id" jdbcType="INTEGER" property="empId" />
-		<result column="emp_name" jdbcType="VARCHAR" property="empName" />
-		<result column="emp_gender" jdbcType="CHAR" property="empGender" />
-		<result column="emp_email" jdbcType="VARCHAR" property="empEmail" />
-		<result column="dep_id" jdbcType="INTEGER" property="depId" />
-	</resultMap>
-
-	<resultMap type="employee" id="WithDeptResultMap">
+	<resultMap type="com.xiaoyb.domain.Employee" id="WithDeptResultMap">
 		<id column="emp_id" jdbcType="INTEGER" property="empId" />
 		<result column="emp_name" jdbcType="VARCHAR" property="empName" />
 		<result column="emp_gender" jdbcType="CHAR" property="empGender" />
 		<result column="emp_email" jdbcType="VARCHAR" property="empEmail" />
 		<result column="dep_id" jdbcType="INTEGER" property="depId" />
 		<!-- 指定联合查询出的部门字段的封装 -->
-		<association property="department" javaType="department">
-			<id column="dept_id" property="deptId" />
-			<result column="dept_name" property="deptName" />
+		<association property="department" javaType="com.xiaoyb.domain.Department">
+			<id column="dep_id" property="depId" />
+			<result column="dep_name" property="depName" />
 		</association>
 	</resultMap>
 
@@ -32,10 +24,11 @@
 		select count(emp_id) from employee where emp_name
 		=#{empName}
 	</select>
+
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
-		resultMap="BaseResultMap">
+		resultMap="WithDeptResultMap">
 		select
-		<include refid="Base_Column_List" />
+		*
 		from employee
 		where emp_id = #{empId,jdbcType=INTEGER}
 	</select>
