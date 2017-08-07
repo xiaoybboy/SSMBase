@@ -7,6 +7,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	<!-- spring配置文件，与业务逻辑相关 ，如数据源，事务等 -->
 
+	<import resource="classpath:spring-shiro.xml" />
+
 	<!-- 扫描spring bean -->
 	<context:component-scan base-package="com.xiaoyb">
 		<context:exclude-filter type="annotation"
