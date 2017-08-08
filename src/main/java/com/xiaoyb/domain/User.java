@@ -1,6 +1,9 @@
 package com.xiaoyb.domain;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class User {
 	private Integer id;
@@ -12,6 +15,26 @@ public class User {
 	private Date birthday;
 
 	private String password;
+
+	private List<Role> roleList;// 一个用户具有多个角色
+
+	// 获取用户所有权限的权限名
+	public Set<String> getRolesName() {
+		List<Role> roles = this.getRoleList();
+		Set<String> set = new HashSet<String>();
+		for (Role role : roles) {
+			set.add(role.getRolename());
+		}
+		return set;
+	}
+
+	public List<Role> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
 
 	public Integer getId() {
 		return id;

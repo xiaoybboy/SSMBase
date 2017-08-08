@@ -11,7 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.xiaoyb.dao.DepartmentMapper;
 import com.xiaoyb.dao.EmployeeMapper;
+import com.xiaoyb.dao.UserDao;
 import com.xiaoyb.domain.Employee;
+import com.xiaoyb.domain.User;
 
 /**
  * 测试dao层的工作
@@ -36,6 +38,9 @@ public class DaoTest {
 	EmployeeMapper employeeMapper;
 
 	@Autowired
+	UserDao userDao;
+
+	@Autowired
 	SqlSession sqlSession;
 
 	/**
@@ -43,10 +48,15 @@ public class DaoTest {
 	 */
 	@Test
 	public void testCRUD() {
-		List<Employee> employees = employeeMapper.selectAllEmp();
-		for (int i = 0; i < employees.size(); i++) {
-			System.out.println(employees.get(i));
-		}
+		User user = userDao.findUserByLoginName("xiaoyb");
+		System.out.println(user.getRoleList().get(0));
+
+		// List<Employee> employees = employeeMapper.selectAllEmp();
+
+		/**
+		 * for (int i = 0; i < employees.size(); i++) {
+		 * System.out.println(employees.get(i)); }
+		 **/
 		/*
 		 * //1、创建SpringIOC容器 ApplicationContext ioc = new
 		 * ClassPathXmlApplicationContext("applicationContext.xml"); //2、从容器中获取mapper

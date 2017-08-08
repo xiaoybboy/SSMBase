@@ -9,10 +9,8 @@
 		<setting name="logImpl" value="STDOUT_LOGGING" />
 	</settings>
 
-	<!-- <typeAliases> <package name="com.xiaoyb.domain" /> </typeAliases> -->
 	<typeAliases>
-		<typeAlias alias="employee" type="com.xiaoyb.domain.Employee" />
-		<typeAlias alias="department" type="com.xiaoyb.domain.Department" />
+		<package name="com.xiaoyb.domain" />
 	</typeAliases>
 
 	<!-- 配置分页插件 -->

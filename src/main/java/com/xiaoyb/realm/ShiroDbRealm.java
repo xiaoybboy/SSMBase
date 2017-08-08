@@ -1,7 +1,6 @@
 package com.xiaoyb.realm;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -18,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.xiaoyb.domain.Role;
 import com.xiaoyb.domain.User;
 import com.xiaoyb.service.UserService;
 import com.xiaoyb.utils.CipherUtil;
@@ -28,10 +28,6 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
 	@Autowired
 	private UserService userService;
-
-	public ShiroDbRealm() {
-		super();
-	}
 
 	/**
 	 * 登陆验证
@@ -56,17 +52,23 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		/* 这里应该根据userName使用role和permission 的serive层来做判断，并将对应 的权限加进来，下面简化了这一步 */
-		Set<String> roleNames = new HashSet<String>();
-		Set<String> permissions = new HashSet<String>();
-		roleNames.add("admin");// 添加角色。对应到index.jsp
-		roleNames.add("administrator");
-		permissions.add("create");// 添加权限,对应到index.jsp
-		permissions.add("login?main");
-		permissions.add("login?logout");
-		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roleNames);
-		info.setStringPermissions(permissions);
-		return info;
+		// 获取登录时输入的用户名
+		String loginName = (String) principals.fromRealm(getName()).iterator().next();
+		// 到数据库查是否有此对象
+		User user = userService.findUserByLoginName(loginName);
+		if (user != null) {
+			// 权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
+			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+			// 用户的角色集合
+			info.setRoles(user.getRolesName());// 数据库中查询找的用户的角色
+			// 用户的角色对应的所有权限，如果只使用角色定义访问权限，下面的四行可以不要
+			List<Role> roleList = user.getRoleList();
+			for (Role role : roleList) {
+				info.addStringPermissions(role.getPermissionsName());
+			}
+			return info;
+		}
+		return null;
 	}
 
 	/**

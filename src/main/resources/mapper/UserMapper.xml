@@ -7,6 +7,14 @@
 		<result column="age" property="age" jdbcType="INTEGER" />
 		<result column="birthday" property="birthday" jdbcType="DATE" />
 		<result column="password" property="password" jdbcType="VARCHAR" />
+		<collection property="roleList" ofType="role">
+			<id property="id" column="id" />
+			<result property="rolename" column="rolename" />
+			<collection property="permissionList" ofType="permission">
+				<id property="id" column="id" />
+				<result property="permissionname" column="permissionName" />
+			</collection>
+		</collection>
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, name, age, birthday, password
@@ -97,11 +105,15 @@
 		#{password,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+
+	<!-- 根据用户名查找用户 -->
 	<select id="findUserByLoginName" resultMap="BaseResultMap"
 		parameterType="string">
 		select
-		<include refid="Base_Column_List" />
-		from user
-		where name = #{username,jdbcType=VARCHAR}
+		u.id,u.name,u.age,u.birthday,u.password,r.id,r.rolename,p.id,p.permissionName from user
+		u,user_role ur,role r,permission p
+		where
+		u.id=ur.userId and ur.roleId=r.id and p.roleId=r.id and u.name
+		=#{username,jdbcType=VARCHAR}
 	</select>
 </mapper>

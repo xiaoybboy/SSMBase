@@ -37,12 +37,12 @@
 		</javaClientGenerator>
 
 		<!-- table指定每个表的生成策略 -->
-		<table tableName="employee" domainObjectName="Employee"
+		<table tableName="role" domainObjectName="Role"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="department" domainObjectName="Department"
+		<table tableName="permission" domainObjectName="Permission"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
