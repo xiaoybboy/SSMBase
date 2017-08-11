@@ -1,0 +1,13 @@
+
+1.数据表
+User:用户信息表
+Role:角色表(id,角色名)
+Persission:权限表(id,权限名)
+Employee:员工表
+Department:部门表
+
+其中，
+一个用户可以有多种角色（normal,manager,admin等等）
+一个角色可以有多个用户（user1,user2,user3等等）
+一个角色可以有多个权限（save,update,delete,query等等）
+一个权限只属于一个角色（delete只属于manager角色）

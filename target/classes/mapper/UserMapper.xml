@@ -20,7 +20,7 @@
 		id, name, age, birthday, password
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="int">
+		parameterType="int" useCache="true">
 		select
 		<include refid="Base_Column_List" />
 		from user
@@ -110,10 +110,15 @@
 	<select id="findUserByLoginName" resultMap="BaseResultMap"
 		parameterType="string">
 		select
-		u.id,u.name,u.age,u.birthday,u.password,r.id,r.rolename,p.id,p.permissionName from user
+		u.id,u.name,u.age,u.birthday,u.password,r.id,r.rolename,p.id,p.permissionName
+		from user
 		u,user_role ur,role r,permission p
 		where
-		u.id=ur.userId and ur.roleId=r.id and p.roleId=r.id and u.name
+		u.id=ur.userId and
+		ur.roleId=r.id and p.roleId=r.id and u.name
 		=#{username,jdbcType=VARCHAR}
 	</select>
+
+	<!-- 缓存类配置 -->
+	<cache type="com.xiaoyb.redis.RedisCache" />
 </mapper>

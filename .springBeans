@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/resources/springmvc.xml</config>
 		<config>src/main/resources/application.xml</config>
+		<config>src/main/resources/spring-redis.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -1,5 +1,8 @@
 package com.xiaoyb.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,9 +14,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.xiaoyb.domain.User;
 import com.xiaoyb.realm.ShiroDbRealm;
@@ -25,6 +28,20 @@ public class UserControler {
 	private static Logger logger = LoggerFactory.getLogger(ShiroDbRealm.class);
 	@Autowired
 	private UserService userService;
+
+	/**
+	 * 测试redis缓存
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/QueryUser")
+	public ModelAndView toQueryUser() {
+		System.out.println("test");
+		User user = userService.getUserById(1);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user", user);
+		return new ModelAndView("login", map);
+	}
 
 	/**
 	 * 初始登陆界面

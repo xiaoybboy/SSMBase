@@ -7,6 +7,11 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<!-- 打印查询语句 -->
 		<setting name="logImpl" value="STDOUT_LOGGING" />
+
+		<!-- 二级缓存开启 ,使用redis做二级缓存 -->
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="aggressiveLazyLoading" value="true" />
 	</settings>
 
 	<typeAliases>
