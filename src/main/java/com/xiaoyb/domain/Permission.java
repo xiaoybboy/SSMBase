@@ -1,6 +1,8 @@
 package com.xiaoyb.domain;
 
-public class Permission {
+import java.io.Serializable;
+
+public class Permission implements Serializable {
 	private Integer id;
 
 	private String permissionname;

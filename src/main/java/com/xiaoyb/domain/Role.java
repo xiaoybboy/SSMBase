@@ -1,9 +1,10 @@
 package com.xiaoyb.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Role {
+public class Role implements Serializable {
 	private Integer id;
 
 	private String rolename;

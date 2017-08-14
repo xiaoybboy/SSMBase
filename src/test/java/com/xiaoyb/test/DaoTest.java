@@ -48,8 +48,10 @@ public class DaoTest {
 	 */
 	@Test
 	public void testCRUD() {
-		User user = userDao.findUserByLoginName("xiaoyb");
-		System.out.println(user.getRoleList().get(0));
+
+		User user = userDao.selectByPrimaryKey(1);
+
+		User user2 = userDao.selectByPrimaryKey(1);
 
 		// List<Employee> employees = employeeMapper.selectAllEmp();
 

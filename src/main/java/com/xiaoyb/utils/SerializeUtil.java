@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 /**
  * 序列化与反序列化工具
  * 
+ * 对任何对象序列化和反序列工具
+ * 
  * @author XIAO
  *
  */

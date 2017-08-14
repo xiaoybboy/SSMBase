@@ -1,11 +1,14 @@
 package com.xiaoyb.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class User {
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private Integer id;
 
 	private String name;
