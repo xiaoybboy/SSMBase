@@ -3,34 +3,34 @@ package com.xiaoyb.domain;
 import java.io.Serializable;
 
 public class Permission implements Serializable {
-	private Integer id;
+    private Integer id;
 
-	private String permissionname;
+    private String permissionname;
 
-	private Role role;
+    private Role role;
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getPermissionname() {
-		return permissionname;
-	}
+    public String getPermissionname() {
+        return permissionname;
+    }
 
-	public void setPermissionname(String permissionname) {
-		this.permissionname = permissionname == null ? null : permissionname.trim();
-	}
+    public void setPermissionname(String permissionname) {
+        this.permissionname = permissionname == null ? null : permissionname.trim();
+    }
 
-	public Role getRole() {
-		return role;
-	}
+    public Role getRole() {
+        return role;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
 }

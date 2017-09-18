@@ -20,11 +20,10 @@ import java.util.UUID;
 @Component
 public class SystemLogAspect {
 
+    private static final Logger logger = LoggerFactory.getLogger(SystemLogAspect.class);
     //注入Service用于把日志保存数据库
     @Resource
     private SystemLogService systemLogService;
-
-    private static final Logger logger = LoggerFactory.getLogger(SystemLogAspect.class);
 
     //Controller层切点
     @Pointcut("execution (* com.xiaoyb.controller..*.*(..))")

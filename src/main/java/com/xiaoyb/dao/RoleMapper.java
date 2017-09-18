@@ -3,15 +3,15 @@ package com.xiaoyb.dao;
 import com.xiaoyb.domain.Role;
 
 public interface RoleMapper {
-	int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id);
 
-	int insert(Role record);
+    int insert(Role record);
 
-	int insertSelective(Role record);
+    int insertSelective(Role record);
 
-	Role selectByPrimaryKey(Integer id);
+    Role selectByPrimaryKey(Integer id);
 
-	int updateByPrimaryKeySelective(Role record);
+    int updateByPrimaryKeySelective(Role record);
 
-	int updateByPrimaryKey(Role record);
+    int updateByPrimaryKey(Role record);
 }
